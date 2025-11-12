@@ -1,17 +1,19 @@
-"""
-Configuration settings for API Gateway
-"""
 from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
     # Service
-    api_gateway_port: int = 8000
-    jwt_secret: str = "614ab04a07be65ef6b7cf2f1bd8c7725"
-    api_rate_limit: int = 100
+    email_service_port: int = 8002
     
     # Database (PostgreSQL connection string)
-    database_url: str = "postgresql+asyncpg://notification_user:notification_password@postgres:5432/api_gateway_db"
+    database_url: str = "postgresql+asyncpg://notification_user:notification_password@postgres:5432/email_service_db"
+    
+    # Gmail SMTP
+    smtp_host: str = "smtp.gmail.com"
+    smtp_port: int = 587
+    smtp_user: str = ""
+    smtp_password: str = ""
+    smtp_from_name: str = "Notification System"
     
     # RabbitMQ
     rabbitmq_host: str = "localhost"
@@ -19,6 +21,7 @@ class Settings(BaseSettings):
     rabbitmq_user: str = "guest"
     rabbitmq_password: str = "guest"
     rabbitmq_vhost: str = "/"
+    email_queue_name: str = "email.queue"
     
     # Redis
     redis_host: str = "localhost"
@@ -28,6 +31,11 @@ class Settings(BaseSettings):
     # Service URLs
     user_service_url: str = "http://localhost:8001"
     template_service_url: str = "http://localhost:8004"
+    api_gateway_url: str = "http://localhost:8000"
+    
+    # Retry Configuration
+    max_retry_attempts: int = 3
+    retry_delay_seconds: int = 5
     
     # Logging
     log_level: str = "info"
