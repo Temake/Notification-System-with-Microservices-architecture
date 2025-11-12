@@ -1,6 +1,4 @@
-"""
-Models package
-"""
+
 from app.models.notification import (
     NotificationType,
     NotificationRequest,

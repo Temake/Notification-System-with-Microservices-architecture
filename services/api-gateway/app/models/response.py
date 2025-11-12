@@ -9,7 +9,6 @@ T = TypeVar('T')
 
 
 class PaginationMeta(BaseModel):
-    """Pagination metadata"""
     total: int
     limit: int
     page: int
@@ -19,7 +18,6 @@ class PaginationMeta(BaseModel):
 
 
 class ApiResponse(BaseModel, Generic[T]):
-    """Standard API response format"""
     success: bool
     data: Optional[T] = None
     error: Optional[str] = None
